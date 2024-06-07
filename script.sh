@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 TEMP_PATH="$(mktemp -d)"
 PATH="${TEMP_PATH}:$PATH"
