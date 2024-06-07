@@ -3,11 +3,10 @@
 TEMP_PATH="$(mktemp -d)"
 PATH="${TEMP_PATH}:$PATH"
 export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
-# STYLELINT_FORMATTER="${GITHUB_ACTION_PATH}/stylelint-formatter-rdjson/index.js"
+STYLELINT_FORMATTER="${GITHUB_ACTION_PATH}/stylelint-formatter-rdjson/index.js"
 
 __run_stylelint() {
-  cmd="stylelint ${INPUT_STYLELINT_INPUT}
-  #  --custom-formatter ${STYLELINT_FORMATTER}"
+  cmd="stylelint ${INPUT_STYLELINT_INPUT} --custom-formatter ${STYLELINT_FORMATTER}"
 
   if [ -n "${INPUT_STYLELINT_CONFIG}" ]; then
     cmd="${cmd} --config='${INPUT_STYLELINT_CONFIG}'"
@@ -21,7 +20,7 @@ __run_stylelint() {
 }
 
 __run_reviewdog() {
-  reviewdog -f=stylelint \
+  reviewdog -f=rdjson \
             -name="${INPUT_NAME}" \
             -reporter="${INPUT_REPORTER}" \
             -level="${INPUT_LEVEL}" \
