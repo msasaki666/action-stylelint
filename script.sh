@@ -50,6 +50,7 @@ fi
 echo "stylelint version: $(npx --no-install -c 'stylelint --version')"
 
 echo '::group:: Running stylelint with reviewdog 🐶 ...'
+set -x
 stylelint_results=$(__run_stylelint)
 
 # stylelint exit codes are documented here:
@@ -66,4 +67,5 @@ echo "${stylelint_results}" | __run_reviewdog
 
 reviewdog_rc=$?
 echo '::endgroup::'
+set +x
 exit $reviewdog_rc
